@@ -13,7 +13,7 @@ install_mvn_trivy_docker_kubectl:       # This job runs in the build stage, whic
     - echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
     - sudo apt-get update
     - sudo apt-get install -y trivy
-    - sudo snap install -y kubectl --classic
+    - sudo snap install kubectl --classic
     - echo "installed tools.."
 
   tags:
