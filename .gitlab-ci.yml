@@ -59,9 +59,9 @@ sonarqube-check:
 build_tag_push_image:       # This job runs in the docker stage
   stage: docker
   script:
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - mvn package
     - sudo docker build -t haroonf8/javaapp:latest .
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - sudo docker push haroonf8/javaapp:latest
   only:
     - main
