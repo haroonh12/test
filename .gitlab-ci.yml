@@ -17,7 +17,7 @@ install_mvn_trivy_docker_kubectl:       # This job runs in the tool install stag
     - sudo apt-get update
     - sudo apt-get install -y trivy
     - sudo snap install kubectl --classic
-    - echo "installed tools."
+    - echo "installed tools...."
 
   tags:
     - self-hosted
