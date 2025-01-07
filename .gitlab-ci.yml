@@ -52,15 +52,9 @@ sonarqube-check:
   allow_failure: true
   only:
     - main
-
-build_app:       # This job runs in the build stage
-  stage: build
-  script:
-    - mvn package
-  only:
-    - main
   tags:
     - self-hosted
+
 
 build_tag_push_image:       # This job runs in the docker stage
   stage: docker
