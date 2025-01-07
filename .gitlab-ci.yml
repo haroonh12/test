@@ -4,6 +4,7 @@ stages:          # List of stages for jobs, and their order of execution
   - security
   - build
   - docker
+  - docker_image_scan
 
 install_mvn_trivy_docker_kubectl:       # This job runs in the tool install stage, which runs first.
   stage: install_tools
@@ -63,6 +64,17 @@ build_tag_push_image:       # This job runs in the docker stage
     - sudo docker push haroonf8/javaapp:latest
   only:
     - main
+  tags:
+    - self-hosted
+
+docker_scan:
+  stage: docker_image_scan
+  script:
+    - trivy image --format table --output trivy-report.html haroonf8/javaapp:latest
+  artifacts:
+    paths:
+      - trivy-report.html
+    expire_in: 1 hour
   tags:
     - self-hosted
 
