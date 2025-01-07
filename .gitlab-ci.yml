@@ -52,8 +52,6 @@ sonarqube-check:
   allow_failure: true
   only:
     - main
-  tags:
-    - self-hosted
 
 
 build_tag_push_image:       # This job runs in the docker stage
