@@ -72,7 +72,6 @@ trivy_image_scan:
 image_push_to_ECR:
   stage: image_push
   script:
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 851725646816.dkr.ecr.us-east-1.amazonaws.com
     - docker tag java-app-image-repo:latest 851725646816.dkr.ecr.us-east-1.amazonaws.com/java-app-image-repo:latest
     - docker push 851725646816.dkr.ecr.us-east-1.amazonaws.com/java-app-image-repo:latest
   tags:
