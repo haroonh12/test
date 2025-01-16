@@ -65,7 +65,7 @@ docker_build:
 trivy_image_scan:
   stage: trivy_scan
   script:
-    - docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.58.2 image repo-name:$CI_COMMIT_SHA
+    - docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.58.2 image java-app-image-repo:latest
   tags:
     - self-hosted
 
