@@ -3,6 +3,7 @@ stages:          # List of stages for jobs, and their order of execution
   - test
   - security
   - build
+  - trivy_scan
 
 install_mvn_trivy_docker_kubectl:       # This job runs in the tool install stage, which runs first.
   stage: install_tools
@@ -57,6 +58,13 @@ docker_build:
   script:
     - mvn clean package
     - docker build -t repo-name:$CI_COMMIT_SHA .
+  tags:
+    - self-hosted
+
+trivy_image_scan:
+  stage: trivy_scan
+  script:
+    - docker run -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/Library/Caches:/root/.cache/ aquasec/trivy:0.58.2 image repo-name:$CI_COMMIT_SHA
   tags:
     - self-hosted
 
