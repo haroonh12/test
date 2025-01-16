@@ -78,13 +78,6 @@ image_push_to_ECR:
   tags:
     - self-hosted
 
-image_deploy_to_ECS:
-  stage: image_deploy
-  script:
-    - aws ecs update-service --cluster Production-cluster --service service-app-1 --force-new-deployment --region us-east-1
-  tags:
-    - self-hosted
-
 
 
 
