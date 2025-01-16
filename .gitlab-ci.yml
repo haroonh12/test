@@ -5,6 +5,7 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - trivy_scan
   - image_push
+  - image_deploy
 
 install_mvn_trivy_docker_kubectl:       # This job runs in the tool install stage, which runs first.
   stage: install_tools
@@ -74,6 +75,13 @@ image_push_to_ECR:
   script:
     - docker tag java-app-image-repo:latest 851725646816.dkr.ecr.us-east-1.amazonaws.com/java-app-image-repo:latest
     - docker push 851725646816.dkr.ecr.us-east-1.amazonaws.com/java-app-image-repo:latest
+  tags:
+    - self-hosted
+
+image_deploy_to_ECS:
+  stage: image_deploy
+  script:
+    - aws ecs update-service --cluster Production-cluster --service service-app-1 --force-new-deployment --region us-east-1
   tags:
     - self-hosted
 
